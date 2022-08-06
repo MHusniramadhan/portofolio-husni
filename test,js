@@ -1,0 +1,201 @@
+// Pemanggilan package express
+const express = require('express')
+
+// Menggunakan package express
+const app = express()
+
+// set template engine
+app.set('view engine', 'hbs')
+
+app.use('/public', express.static(__dirname + '/public'))
+app.use(express.urlencoded({ extended: false }))
+
+// true => sudah login
+// false => belum login
+const isLogin = true
+
+const blogs = [
+    {
+        title: "Pasar Coding di Indonesia Dinilai Masih Menjanjikan",
+        content: "Ketimpangan sumber daya manusia (SDM) di sektor digital masih menjadi isu yang belum terpecahkan. Berdasarkan penelitian ManpowerGroup, ketimpangan SDM global, termasuk Indonesia, meningkat dua kali lipat dalam satu dekade terakhir. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam, molestiae numquam! Deleniti maiores expedita eaque deserunt quaerat! Dicta, eligendi debitis?",
+        author: "Ichsan Emrald Alamsyah",
+        posted_at: "12 Jul 2021 22:30 WIB"
+    }
+]
+
+let month = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+]
+
+// Set endpoint
+app.get('/', function (req, res) {
+    res.send("Hello World")
+})
+
+app.get('/home', function (req, res) {
+    res.render('index')
+})
+
+app.get('/myproject', function (req, res) {
+
+    console.log(blogs) // hanya ada 4 properti
+
+    let dataBlogs = blogs.map(function (data) {
+        return {
+            ...data,
+            isLogin: isLogin
+        }
+    })
+
+    res.render('blog', { isLogin: isLogin, blogs: dataBlogs })
+})
+
+app.get('/add-blog', function (req, res) {
+
+    if (!isLogin) {
+        res.redirect('/home')
+    }
+
+    res.render('form-blog')
+})
+
+app.post('/myproject', function (req, res) {
+    let name = req.body.title
+    let content = req.body.content
+    let date = new Date()
+
+    let blog = {
+        
+    name: req.body.name,
+    content: req.body.content,
+    start_date: req.body.start,
+    end_date: req.body.end,
+    image: req.file.filename,
+    }
+
+    blogs.push(blog)
+
+    res.redirect('/blog')
+
+})
+
+app.get('/blog/:id', function (req, res) {
+    let id = req.params.id
+    console.log(`Id dari client : ${id}`)
+
+    res.render('blog-detail', { id: id })
+})
+
+app.get('/delete-blog/:index', function (req, res) {
+    let index = req.params.index
+
+    console.log(`Index data : ${index}`)
+
+    blogs.splice(index, 1)
+    res.redirect('/blog')
+})
+
+app.get('/contact-me', function (req, res) {
+    res.render('contact')
+})
+
+// Konfigurasi port aplikasi
+const port = 5000
+app.listen(port, function () {
+    console.log(`Server running on port ${port}`);
+})
+
+function getFullTime(time) {
+    let date = time.getDate()
+    let monthIndex = time.getMonth()
+    let year = time.getFullYear()
+
+    let hours = time.getHours()
+    let minutes = time.getMinutes()
+
+    if (minutes < 10) {
+        minutes = '0' + minutes
+    }
+
+    return `${date} ${month[monthIndex]} ${year} ${hours}:${minutes} WIB`
+}
+function getDistanceTime(time) {
+    const distance = new Date() - new Date(time);
+  
+    // Convert to day
+    const miliseconds = 1000;
+    const secondsInMinute = 3600; //Second in 1 minute
+    const hoursInDay = 23;
+    const dayDistance = distance / (miliseconds * secondsInMinute * hoursInDay);
+  
+    if (dayDistance >= 1) {
+      return Math.floor(dayDistance) + ' day ago';
+    } else {
+      // Convert to hour
+      const hourDistance = Math.floor(distance / (1000 * 60 * 60));
+      if (hourDistance > 0) {
+        return hourDistance + ' hour ago';
+      } else {
+        // Convert to minute
+        const minuteDistance = Math.floor(distance / (1000 * 60));
+        return minuteDistance + ' minute ago';
+      }
+    }
+  }
+  
+  function monthDuration(endDate, startDate) {
+    let month;
+    let year;
+    let monthDistance;
+    let endMonth = endDate.getMonth();
+    let startMonth = startDate.getMonth();
+    let endYear = endDate.getFullYear();
+    let startYear = startDate.getFullYear();
+  
+    if (startYear == endYear) {
+      if (startMonth == endMonth) {
+        month = 1;
+        return 'durasi ' + month + ' bulan';
+      } else {
+        month = endMonth - startMonth;
+        return 'durasi ' + month + ' bulan';
+      }
+    }
+  
+    if (endYear > startYear) {
+      if (endYear - startYear == 1) {
+        if (startMonth == endMonth) {
+          return 'durasi 1 tahun';
+        } else if (startMonth > endMonth) {
+          month = (startMonth - endMonth - 12) * -1;
+          return 'durasi ' + month + ' bulan';
+        } else if (startMonth < endMonth) {
+          month = endMonth - startMonth;
+          return 'durasi 1 tahun ' + month + ' bulan';
+        }
+      } else {
+        year = endYear - startYear;
+        if (startMonth == endMonth) {
+          return 'durasi ' + year + ' tahun ';
+        } else if (startMonth > endMonth) {
+          year -= 1;
+          month = (startMonth - endMonth - 12) * -1;
+          return 'durasi ' + year + ' tahun ' + month + ' bulan';
+        } else if (startMonth < endMonth) {
+          month = endMonth - startMonth;
+          return 'durasi ' + year + ' tahun ' + month + ' bulan';
+        }
+      }
+    }
+  }

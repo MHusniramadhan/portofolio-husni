@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="icon" href="public/assets/logo.png">
+  <title>Creating Navbar & Layouting</title>
+  <link rel="stylesheet" href="public/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <!-- nav star -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-lg">
+      <a class="navbar-brand me-5" href="/home">
+        <img src="public/assets/logo.png" alt="logo" />
+      </a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="/blog" class="nav-link list-active">Add Project</a>
+          </li>
+        </ul>
+      </div>
+      <div class="d-flex contact-me">
+        <a href="/contact-me"> Contact Me </a>
+      </div>
+    </div>
+  </nav>
+  <!-- nav end -->
+
+  <!-- star -->
+  <div class="personal">
+    <div class="left">
+      <div>
+        <h1>Welcome to my Profile</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+          Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <p class="contact-me">
+          <a href="contact.html">contact</a>
+          <i href="public/assets/CV Muhamad Husni Ramadhan.pdf ">Download CV</i><img
+            src="public/assets/download-logo.png" alt="donwload">
+        </p>
+        <h1>Found Me on</h1>
+        <span class="sosmed-list">
+          <a href="https://www.facebook.com/muhammad.husen.9066389"><img src="public/assets/facebook.png" alt="facebook"
+              target="blank"></a>
+          <a href="https://twitter.com"><img src="public/assets/twitter.png" alt="twitter" target="blank"></a>
+          <a href="https://www.instagram.com/officialdans.k/"><img src="public/assets/instagram.png" alt="instagram"
+              target="blank"></a>
+          <a href="https://gmail.com"><img src="public/assets/mail.png" alt="mail" target="blank"></a>
+          <a href="https://wa.me/qr/PR6CTFWF4XYUI1"><img src="public/assets/whatsapp.png" alt="whatsapp"
+              target="blank"></a>
+        </span>
+      </div>
+    </div>
+    <div class="right">
+      <div class="card">
+        <div class="image">
+          <img src="public/assets/my-pic.jpg" alt="my image" />
+        </div>
+
+        <div class="header">
+          <h2>muhamad Husni Ramadhan </h2>
+        </div>
+        <div class="content">
+          <p> I'm a student of Pamulang University I'm Studying Fullstack Dev dumbways </p>
+          <table border="1">
+            <tr>
+              <th> Experience</th>
+              <th>Year</th>
+            </tr>
+            <tr>
+              <td>Build Apps Dumbways.id</td>
+              <td>2022</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="line" />
+  <h1 style="text-align: center;"> MY PROJECT </h1>
+  <div id="contents" class="project-list">
+    <!-- dynamic content would be here -->
+    <div class="project-list-item">
+      <div class="project-image">
+        <img src="public/assets/blog-img.png" alt="" />
+      </div>
+      <div class="project-content">
+        <h5><a href="project-detail.html" target="_blank">Dumbways Mobile App- 2021</a>
+        </h5>
+        <div class="detail-project-content">
+          12 Jul 2021 22:30 WIB
+          <div class="tampil">
+            <img src="public/assets/playstore.png" alt="playstore" />
+            <img src="public/assets/android.png" alt="android" />
+            <img src="public/assets/java.png" alt="java" />
+          </div>
+        </div>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, rem assumenda. Repellat quos officiis
+          quisquam, veniam,
+          animi similique voluptatem repellendus vero mollitia in non voluptatibus error sunt. Aut, dicta praesentium.
+        </p>
+        <div class="btn-group">
+          <button class="btn-edit">Edit Post</button>
+          <button class="btn-post">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>
